@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "css-audit": "node ./src/index.js",
+    "postcss": "postcss",
     "lint:js": "eslint src",
     "format:js": "prettier {src,.}/**/*.js --write"
   },
@@ -21,6 +22,8 @@
     "get-css-colors": "3.3.1",
     "glob": "7.1.6",
     "minimist": "^1.2.5",
+    "postcss": "^7.0.27",
+    "postcss-cli": "^7.1.0",
     "prettier": "npm:wp-prettier@1.19.1",
     "tinycolor2": "1.4.1"
   },
