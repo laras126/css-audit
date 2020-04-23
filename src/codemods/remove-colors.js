@@ -4,6 +4,7 @@ const getColors = require( 'get-css-colors' );
 /* A size is any number, optionally with a unit. */
 const isSize = ( value ) => /^\d+\s?([a-zA-Z]+)?$/.test( value.trim() );
 
+/* If the value has a color in it, getColors will return an array. */
 const isColor = ( value ) => null !== getColors( value );
 
 /* A line style is from a set of values */
@@ -65,6 +66,7 @@ module.exports = postcss.plugin( 'remove-colors', function() {
 			// Remove any declarations that have color.
 			rule.walkDecls( ( decl ) => {
 				const hasColors = getColors( decl.value );
+				// grayscale isn't actually a color, it's used in antialiasing.
 				if ( 'grayscale' === decl.value ) {
 					return;
 				}
@@ -83,7 +85,7 @@ module.exports = postcss.plugin( 'remove-colors', function() {
 				rule.remove();
 			}
 		} );
-		// Remove all empty rule blocks.
+		// Remove all empty @rule blocks.
 		root.walkAtRules( ( rule ) => {
 			if ( rule.nodes && 0 === rule.nodes.length ) {
 				rule.remove();
